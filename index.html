@@ -1,0 +1,393 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+	
+	<!-- Bootstrap Icon -->
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
+	<!-- link icon : https://icons.getbootstrap.com/ -->
+	
+	 <!-- Favicons -->
+	<link href="img/mid.jpg" rel="Icon">
+	
+
+	<!-- AOS -->
+	<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+	
+	
+	<!-- My style css -->
+	<link rel="stylesheet" href="jo.css">
+	
+    <title>My Porfolio | Mid</title>
+	
+  </head>
+  <body id="home">
+  
+  <!-- Navbar -->
+		<!-- 
+		jika ingin merubah style background,warna tulisan dll, menggunakan code dibawah ini (style=" ") :
+	
+			<nav class="navbar navbar-expand-lg navbar-light" style="background-color: yellow">
+		
+		-->
+	<nav class="navbar navbar-expand-lg navbar-dark bg-success shadow-sm fixed-top"> <!-- 
+																	navbar-light : navbar backgroundnya terang otomatis bootsrap buat tulisan gelap 
+																	navbar-dark : navbar backgroundnya gelap otomatis bootsrap buat tulisan terang (sesuai background)
+																	bg-success : background-warna yang disediakan bootsrap success=hijau
+																	shadow-sm : shadow small (bayangan kecil), jika ingin besar "shadow" saja
+																	-->
+		<div class="container"> <!-- 
+									jika ingin full dari kiri ke kanan : "container-fluid" 
+												ketengah : "container"
+								-->
+			<a class="navbar-brand" href="#">Mid</a>
+				<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+					<span class="navbar-toggler-icon"></span>
+				</button>
+				
+				
+		<div class="collapse navbar-collapse" id="navbarNav">
+		  <ul class="navbar-nav ms-auto"> <!-- 
+											ms-auto (marginstart-auto/start:kiri, end:kanan) : agar navbarnya rata kanan
+											
+											-->
+			<li class="nav-item">
+			  <a class="nav-link active" aria-current="page" href="#home">Home</a>
+			</li>
+			
+			<li class="nav-item">
+			  <a class="nav-link" href="#about">About</a>
+			</li>
+			
+			<li class="nav-item">
+			  <a class="nav-link" href="#projects">Projects</a>
+			</li>
+			
+			<li class="nav-item">
+			  <a class="nav-link" href="#contact">Contact</a> <!--
+															membuat daftar yang tidak bisa diklik/hanya sekedar pajangan (disable) :
+															
+															<a class="nav-link disabled">Contacts</a>
+															
+														
+														--->
+			</li>
+			
+		  </ul>
+		</div>
+	  </div>
+	</nav>
+
+  
+  <!-- End Navbar -->
+  
+  <!--- Jumbotron -->
+	<section class="jumbotron text-center">
+		<img src="img/mid.jpg" alt="Mid" width="200" class="rounded-circle img-thumbnail"> <!--	
+																						
+																						penambahan class => class="rounded-circle"
+																						untuk membuat gambar jadi bulat
+																						"img-thumbnail" : border putih disekeliling gambar
+																						-->
+	  <h1 class="display-4">Miduk Jhon</h1>
+			  <!--- 
+					Penggunaan CSS style untuk bootstrap
+			
+			<h1 class="text-center text-danger">Hello, world!</h1> <!-- Pembuatan "class" untuk membuat style pengganti css (untuk penggunaan framework bootstrap) 
+			
+			
+			-->
+	  <p class="lead "></p>
+		<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
+			<path fill="#FFFFFF" fill-opacity="1" d="M0,128L48,112C96,96,192,64,288,80C384,96,480,160,576,181.3C672,203,768,181,864,149.3C960,117,1056,75,1152,58.7C1248,43,1344,53,1392,58.7L1440,64L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path>
+		</svg>
+	 
+	</section>
+		 <!-- jika ingin membuat tombol button 
+		<a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a>
+		-->
+  
+  <!--- End Jumbotron -->
+  
+  
+  <!-- About -->
+	<section id="about">
+		<div class="container">
+			<div class="row text-center mb-3"> <!-- 
+												mb-3 : margin bottom (spasing kebawah sebanyak 3 px)
+												
+												-->
+				<div class="col">
+					<h2>About Me</h2>
+				</div>
+			</div>
+			<div class="row justify-content-center fs-5 text-center">
+				<div class="col-md-4" data-aos="fade-right" data-aos-duration="1000">
+				<p> Gunakan alat parafraser kami untuk mengubah kata-kata dengan sinonim atau menulis ulang esai dan artikel, juga telah digunakan untuk menemukan cara baru untuk mengekspresikan frasa, kalimat, atau kata tunggal. Ini juga digunakan sebagai alat anti plagiarisme.
+					Seperti ketika teks diparafrasekan, itu menghapus plagiarisme dan membuat konten menjadi unik. </p>
+				</div>
+				<div class="col-md-4" data-aos="fade-left" data-aos-duration="1000" data-aos-delay="200">
+				<p> Gunakan alat parafraser kami untuk mengubah kata-kata dengan sinonim atau menulis ulang esai dan artikel, juga telah digunakan untuk menemukan cara baru untuk mengekspresikan frasa, kalimat, atau kata tunggal. Ini juga digunakan sebagai alat anti plagiarisme.
+					Seperti ketika teks diparafrasekan, itu menghapus plagiarisme dan membuat konten menjadi unik.  
+					Gunakan alat parafraser kami untuk mengubah kata-kata dengan sinonim atau menulis ulang esai dan artikel, juga telah digunakan untuk menemukan cara baru untuk mengekspresikan frasa, kalimat, atau kata tunggal. Ini juga digunakan sebagai alat anti plagiarisme.
+				</p>
+				</div>
+			</div>
+		</div>
+		<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
+		  <path fill="lightgreen" fill-opacity="1" d="M0,64L48,101.3C96,139,192,213,288,208C384,203,480,117,576,90.7C672,64,768,96,864,128C960,160,1056,192,1152,197.3C1248,203,1344,181,1392,170.7L1440,160L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path>
+		</svg>
+						
+	</section>
+  
+  <!-- End About -->
+	
+   <!--- Projects -->
+	<section id="projects">
+			<div class="container">
+				<div class="row text-center mb-3">
+					<div class="col">
+						<h2>My Projects</h2>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-4 mb-3"> <!-- md : responsive . dari breakpoint/bootsrap  -->
+						<div class="card" data-aos="flip-right" data-aos-duration="500">
+						  <img src="mid1.jpg" class="card-img-top" alt="Project 1">
+						  <div class="card-body">
+							<p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+						  </div>
+						</div>
+					</div>
+					<div class="col-md-4 mb-3">
+						<div class="card" data-aos="flip-right" data-aos-duration="500" data-aos-delay="100">
+						  <img src="mid2.jpg" class="card-img-top" alt="Project 2">
+						  <div class="card-body">
+							<p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+						  </div>
+						</div>
+					</div>
+					<div class="col-md-4 mb-3">
+						<div class="card"  data-aos="flip-right" data-aos-duration="500" data-aos-delay="200">
+						  <img src="mid3.jpg" class="card-img-top" alt="Project 3">
+						  <div class="card-body">
+							<p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+						  </div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
+			  <path fill="#ffff" fill-opacity="1" d="M0,192L48,170.7C96,149,192,107,288,96C384,85,480,107,576,149.3C672,192,768,256,864,261.3C960,267,1056,213,1152,170.7C1248,128,1344,96,1392,80L1440,64L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path>
+			</svg>
+	</section>
+	
+    <!--- End Projects -->
+	
+	
+	<!---- Galery --->
+	
+	<section id="gallery">
+			<div class="container">
+				<div class="row text-center mb-3">
+					<div class="col">
+						<h2>Gallery</h2>
+					</div>
+				</div>
+				<div class="row justify-content-center">
+					<div class="col-md-3">
+						<a href="#">
+							<img src="img/tumb/mun1.jpg" alt="gambar 1" class="img-fluid gallery-img">
+						</a>
+					</div>
+					<div class="col-md-3">
+						<a href="#">
+							<img src="img/tumb/mun2.jpg" alt="gambar 2" class="img-fluid gallery-img">
+						</a>
+					</div>
+					<div class="col-md-3">
+						<a href="#">
+							<img src="img/tumb/mun3.jpg" alt="gambar 3" class="img-fluid gallery-img">
+						</a>
+					</div>
+					<div class="col-md-3">
+						<a href="#">
+							<img src="img/tumb/mun4.jpg" alt="gambar 4" class="img-fluid gallery-img">
+						</a>
+					</div>
+					<div class="col-md-3">
+						<a href="#">
+							<img src="img/tumb/mun5.jpg" alt="gambar 5" class="img-fluid gallery-img">
+						</a>
+					</div>
+					<div class="col-md-3">
+						<a href="#">
+							<img src="img/tumb/mun6.jpg" alt="gambar 6" class="img-fluid gallery-img">
+						</a>
+					</div>
+					<div class="col-md-3">
+						<a href="#">
+							<img src="img/tumb/mun7.jpg" alt="gambar 7" class="img-fluid gallery-img">
+						</a>
+					</div>
+					<div class="col-md-3">
+						<a href="#">
+							<img src="img/tumb/mun8.jpg" alt="gambar 8" class="img-fluid gallery-img">
+						</a>
+					</div>
+					<div class="col-md-3">
+						<a href="#">
+							<img src="img/tumb/mun9.jpg" alt="gambar 9" class="img-fluid gallery-img">
+						</a>
+					</div>
+					<div class="col-md-3">
+						<a href="#">
+							<img src="img/tumb/mun10.jpg" alt="gambar 10" class="img-fluid gallery-img">
+						</a>
+					</div>
+					
+				</div>
+			</div>
+				
+	</section>
+	
+	<!---- End Galery --->
+	
+	
+    <!--- Contact -->
+		<section id="contact">
+			<div class="container">
+				<div class="row text-center mb-3">
+					<div class="col">
+						<h2>Contact Me</h2>
+					</div>
+				</div>
+				<div class="row justify-content-center"> <!-- justify-content-center: untuk membuat tulisan ketengah -->
+					<div class="col-md-8">
+					
+						<!-- Allert / pemberitahuan -->
+						<div class="alert alert-success alert-dismissible fade show d-none my-alert" role="alert">
+						  <strong>Terimakasih!</strong> Pesan anda sudah kami terima.
+						  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+						</div>
+						<!-- End Allert -->
+						
+						<form name="mid-contact-form">
+						  <div class="mb-3">
+							<label for="name" class="form-label">Nama Lengkap</label>
+							<input type="text" class="form-control" id="name" aria-describedby="name" name="nama">
+						  </div>
+						  <div class="mb-3">
+							<label for="email" class="form-label">Email</label>
+							<input type="email" class="form-control" id="email" aria-describedby="email" name="email">
+						  </div>
+						<div class="mb-3">
+							  <label for="pesan" class="form-label">Pesan</label>
+							  <textarea class="form-control" id="pesan" rows="3" name="pesan"></textarea>
+						</div>
+
+						  <button type="submit" class="btn btn-primary btn-kirim">Kirim</button>
+						  
+							<button class="btn btn-primary btn-loading d-none" type="button" disabled> <!-- class="d-none" : untuk menghilangkan tombol buttonnya ato menyembunyikan -->
+								<span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>
+								Loading...
+							</button>
+						  
+						</form>
+					</div>
+				</div>
+			</div>
+			<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
+			  <path fill="#198754" fill-opacity="1" d="M0,224L48,240C96,256,192,288,288,288C384,288,480,256,576,245.3C672,235,768,245,864,256C960,267,1056,277,1152,256C1248,235,1344,181,1392,154.7L1440,128L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path>
+			</svg>
+		</section>
+		
+    <!--- End Contact -->
+	<!-- footer  -->
+	<footer class="bg-success text-white text-center p-3"> <!-- p-3: padding ke semua sisinya 3 -->
+		<p>Created with <i class="bi bi-bookmark-heart-fill text-danger"></i> by <a href="https://www.instagram.com/midukjhon_/" class="text-white fw-bold"> Miduk Jhon Hutagalung </p>
+	</footer>
+	
+	
+	<!-- End footer  -->
+	
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+
+
+	<!-- Set up JS AOS -->
+	<script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+	<script>
+		const galleryImage = document.querySelectorAll('.gallery-img')
+		
+		galleryImage.forEach((img, i) => { //--> looping agar data animasi terinput secara dinamis
+			img.dataset.aos = 'fade-down';
+			img.dataset.aosDelay = i * 100;
+			img.dataset.aosDuration = 1000;
+		
+		})
+		
+		AOS.init( {
+			once: true,   //--> untuk membuat animasi hanya sekali tamping (jika sudah discrool kebawah dan naik lagi keatas, 
+			duration: 2000,	// animasi sudah tidak ada lagi)
+		});
+	</script>
+	
+	<!---- GSAP (GreenShock) ---->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"></script>
+	<!---- Text plagin GSAP --->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/TextPlugin.min.js"></script>
+	<script>
+		//--> REGISTER PLAGIN GSAP <-----
+		gsap.registerPlugin(TextPlugin); //---> End Register (jika ingin menambah plagin tinggal tambahkan koma setelah text plagin ---> gsap.registerPlugin(TextPlugin, ....., ....);
+		gsap.to('.lead', {duration: 2, delay: 1.5, text: 'Mahasiswa | Pencari Cinta Sejati' })
+		gsap.from('.jumbotron img', {duration: 1, rotateY: 360, opacity: 0}) //--> keadaan awal (menggerakan gambar dari atas(-100) ke posisi semula selama 1detik
+		gsap.from('.navbar', {duration: 1.5, y:'-100%', opacity: 0, ease: 'bounce'})
+		gsap.from('.display-4', {duration: 1.5, x: -50, opacity: 0, delay: 0.5, ease: 'back' })
+	</script>
+	
+	<script>
+	  const scriptURL = 'https://script.google.com/macros/s/AKfycbyhKlCeI5iSw0t3-6BL6hVT293arPPdwhvEqOh8Gg389TSRSvoC1YyYFc7zE-6Vb140Ww/exec'
+	  const form = document.forms['mid-contact-form']
+	  
+	  // Manipulasi tombol button use javascript 
+	  const btnKirim = document.querySelector('.btn-kirim')
+	  const btnLoading = document.querySelector('.btn-loading')
+	  const myAlert = document.querySelector('.my-alert')
+	  // end manipulasi
+		
+	  form.addEventListener('submit', e => {
+		e.preventDefault()
+		
+		// ketika tombol submit di klik 
+		// tampilkan tombol loading, hilangkan tombol kirim
+		btnLoading.classList.toggle('d-none') //--> arti: javascript cariin element "btnLoading", kalo dah ketemu lihat di dalam classList (daftar kelasnya) apakah ada nama class "d-none". jika ada hilangkan, jika tidak ada tambahkan.
+												// toggle: seperti swicth lampu (mati nyala)
+		btnKirim.classList.toggle('d-none') 
+		// End 
+		
+		fetch(scriptURL, { method: 'POST', body: new FormData(form)})
+		  .then(response => {
+		  // tampilkan tombol kirim, hilangkan tombol loading
+		  btnLoading.classList.toggle('d-none')
+		  btnKirim.classList.toggle('d-none') 
+		  // tampilkan alert
+		  myAlert.classList.toggle('d-none')
+		  
+		  // reset formnya atau menghapus semua field yang sudah di isi
+		  form.reset()
+		  
+		  console.log('Success!', response)
+		  })
+		  .catch(error => console.error('Error!', error.message))
+	  })
+	  
+	
+	</script>
+
+  </body>
+</html>
