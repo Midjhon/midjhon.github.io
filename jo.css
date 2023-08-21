@@ -1,25 +1,18 @@
 .jumbotron {
-	padding-top: 6rem;
-	background-color: lightgreen;
-	
-	
-	
+  padding-top: 6rem;
+  background-color: lightgreen;
 }
 
-
-#projects{
-	background-color:lightgreen;
+#projects {
+  background-color: lightgreen;
 }
 section {
-	padding-top: 5rem;
+  padding-top: 5rem;
 }
-
 
 .gallery-img {
-	width: 100%;
-	
+  width: 100%;
 }
 #gallery .row > * {
-	
-	padding: 0;
+  padding: 0;
 }
