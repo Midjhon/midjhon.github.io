@@ -600,32 +600,61 @@
   const lbTitle = document.getElementById('lbTitle');
   const lbCounter = document.getElementById('lbCounter');
   let currentGallery = [];
-  let currentTitle = '';
+  let currentTitles = [];
   let currentIndex = 0;
-
+  
   function updateLightbox(){
     lbImage.src = currentGallery[currentIndex];
-    lbTitle.textContent = currentTitle;
-    lbCounter.textContent = currentGallery.length > 1 ? ' (' + (currentIndex + 1) + '/' + currentGallery.length + ')' : '';
+  
+    // Judul mengikuti gambar yang sedang ditampilkan
+    lbTitle.textContent = currentTitles[currentIndex] || '';
+  
+    lbCounter.textContent = currentGallery.length > 1
+      ? ' (' + (currentIndex + 1) + '/' + currentGallery.length + ')'
+      : '';
   }
-  function openLightbox(images, title, index){
+  
+  function openLightbox(images, titles, index){
     currentGallery = images;
-    currentTitle = title;
+    currentTitles = titles;
     currentIndex = index;
+  
     updateLightbox();
     lightbox.classList.add('show');
   }
-  function closeLightbox(){ lightbox.classList.remove('show'); }
-  function nextImage(){ currentIndex = (currentIndex + 1) % currentGallery.length; updateLightbox(); }
-  function prevImage(){ currentIndex = (currentIndex - 1 + currentGallery.length) % currentGallery.length; updateLightbox(); }
-
+  
+  function closeLightbox(){
+    lightbox.classList.remove('show');
+  }
+  
+  function nextImage(){
+    currentIndex = (currentIndex + 1) % currentGallery.length;
+    updateLightbox();
+  }
+  
+  function prevImage(){
+    currentIndex = (currentIndex - 1 + currentGallery.length) % currentGallery.length;
+    updateLightbox();
+  }
+  
   document.querySelectorAll('.project-thumb').forEach(img => {
     img.addEventListener('click', () => {
-      const images = img.dataset.gallery.split(',').map(s => s.trim()).filter(Boolean);
-      openLightbox(images, img.dataset.title || '', 0);
+  
+      const images = img.dataset.gallery
+        .split(',')
+        .map(s => s.trim())
+        .filter(Boolean);
+  
+      const titles = img.dataset.titles
+        ? img.dataset.titles
+            .split(',')
+            .map(s => s.trim())
+            .filter(Boolean)
+        : [img.dataset.title || ''];
+  
+      openLightbox(images, titles, 0);
     });
   });
-
   document.getElementById('lbClose').addEventListener('click', closeLightbox);
   document.getElementById('lbNext').addEventListener('click', nextImage);
   document.getElementById('lbPrev').addEventListener('click', prevImage);
