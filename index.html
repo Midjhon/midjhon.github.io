@@ -655,9 +655,17 @@
   const lbImage = document.getElementById('lbImage');
   const lbTitle = document.getElementById('lbTitle');
   const lbCounter = document.getElementById('lbCounter');
+  const lbPrev = document.getElementById('lbPrev');
+  const lbNext = document.getElementById('lbNext');
   let currentGallery = [];
   let currentTitles = { id: [], en: [] };
   let currentIndex = 0;
+
+  function updateNavButtons(){
+    const many = currentGallery.length > 1;
+    lbPrev.style.display = (many && currentIndex > 0) ? 'flex' : 'none';
+    lbNext.style.display = (many && currentIndex < currentGallery.length - 1) ? 'flex' : 'none';
+  }
   
   function updateLightbox(){
     lbImage.src = currentGallery[currentIndex];
@@ -728,11 +736,28 @@
   });
 
   // swipe support on mobile
-  let touchStartX = 0;
-  lightbox.addEventListener('touchstart', e => { touchStartX = e.changedTouches[0].screenX; });
+  let touchStartX = 0, touchStartY = 0, multiTouch = false;
+  
+  lightbox.addEventListener('touchstart', e => {
+    if (e.touches.length > 1) { multiTouch = true; return; }   // pinch zoom
+    multiTouch = false;
+    touchStartX = e.changedTouches[0].screenX;
+    touchStartY = e.changedTouches[0].screenY;
+  }, { passive: true });
+  
   lightbox.addEventListener('touchend', e => {
-    const diff = e.changedTouches[0].screenX - touchStartX;
-    if (Math.abs(diff) > 40) diff < 0 ? nextImage() : prevImage();
+    // abaikan kalau habis pinch atau halaman sedang diperbesar
+    const zoomed = window.visualViewport && window.visualViewport.scale > 1.01;
+    if (multiTouch || zoomed) {
+      if (e.touches.length === 0) multiTouch = false;
+      return;
+    }
+    const dx = e.changedTouches[0].screenX - touchStartX;
+    const dy = e.changedTouches[0].screenY - touchStartY;
+    // hanya hitung kalau geserannya dominan ke samping
+    if (Math.abs(dx) > 40 && Math.abs(dx) > Math.abs(dy) * 1.5) {
+      dx < 0 ? nextImage() : prevImage();
+    }
   });
 
   // Read more / Show less
