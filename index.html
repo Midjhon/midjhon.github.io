@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="id">
+<html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -92,6 +92,16 @@
   .nav-links a.active, .nav-links a:hover{color:#fff;}
   .nav-cta{display:flex; align-items:center; gap:18px;}
   .nav-toggle{display:none; background:none; border:none; color:#fff; font-size:24px; cursor:pointer;}
+
+  /* LANGUAGE TOGGLE */
+  .lang-toggle{
+    display:inline-flex; align-items:center; gap:6px;
+    background:transparent; color:var(--on-dark); cursor:pointer;
+    border:1px solid rgba(234,246,241,.3); border-radius:999px;
+    padding:6px 14px; font-family:'Inter',sans-serif; font-size:13px; font-weight:600;
+    transition:background .15s ease, color .15s ease, border-color .15s ease;
+  }
+  .lang-toggle:hover{background:var(--accent); color:var(--dark); border-color:var(--accent);}
 
   @media (max-width:900px){
     .nav-links{
@@ -198,7 +208,7 @@
 
   /* PROJECTS */
   .projects{background:var(--mint);}
-  .project-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:22px;}
+  .project-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:22px; align-items:start;}
   .project-card{
     background:#fff; border-radius:var(--radius); overflow:hidden;
     transition:transform .15s ease, box-shadow .15s ease;
@@ -209,6 +219,17 @@
   .project-top{display:flex; justify-content:space-between; align-items:flex-start; gap:10px;}
   .project-title{font-family:'Poppins',sans-serif; font-weight:600; font-size:16.5px; margin-bottom:8px;}
   .project-desc{color:var(--gray); font-size:14px; margin-bottom:14px;}
+  .project-desc p{margin:0 0 10px;}
+  .project-desc p:last-child{margin-bottom:0;}
+  .desc-more{display:none;}
+  .desc-more.open{display:block;}
+  .desc-toggle{
+    background:none; border:none; padding:0; margin-bottom:14px; cursor:pointer;
+    color:var(--accent-2); font-family:'Inter',sans-serif; font-weight:600; font-size:13.5px;
+  }
+  .desc-toggle .more-open{display:none;}
+  .desc-toggle[aria-expanded="true"] .more-open{display:inline;}
+  .desc-toggle[aria-expanded="true"] .more-closed{display:none;}
   .project-tags{display:flex; gap:8px; flex-wrap:wrap;}
   .tag{
     background:var(--mint); color:var(--accent-2); font-size:11.5px; font-weight:600;
@@ -318,14 +339,17 @@
 <header>
   <nav class="nav">
     <ul class="nav-links" id="navLinks">
-      <li><a href="#home" class="active">Home</a></li>
-      <li><a href="#about">About</a></li>
-      <li><a href="#skills">Skills</a></li>
-      <li><a href="#projects">Projects</a></li>
-      <li><a href="#contact">Contact</a></li>
+      <li><a href="#home" class="active" data-en="Home" data-id="Beranda">Home</a></li>
+      <li><a href="#about" data-en="About" data-id="Tentang">About</a></li>
+      <li><a href="#skills" data-en="Skills" data-id="Keahlian">Skills</a></li>
+      <li><a href="#projects" data-en="Projects" data-id="Proyek">Projects</a></li>
+      <li><a href="#contact" data-en="Contact" data-id="Kontak">Contact</a></li>
     </ul>
     <div class="nav-cta">
       <button class="nav-toggle" id="navToggle" aria-label="Menu"><i class="bi bi-list"></i></button>
+      <button type="button" class="lang-toggle" id="langToggle" aria-label="Translate / Terjemahkan">
+        <i class="bi bi-translate"></i> <span id="langLabel">ID</span>
+      </button>
     </div>
   </nav>
 </header>
@@ -334,13 +358,15 @@
 <section class="hero" id="home">
   <div class="wrap">
     <div class="hero-text">
-      <div class="hero-eyebrow">Hello, I'm</div>
+      <div class="hero-eyebrow" data-en="Hello, I'm" data-id="Halo, saya">Hello, I'm</div>
       <h1>Miduk Jhon <span class="last">Hutagalung</span></h1>
       <p class="role">Web Development | Project Portfolio</p>
-      <p class="desc">I build web projects to turn ideas into something useful.</p>
+      <p class="desc"
+         data-en="I build web projects to turn ideas into something useful."
+         data-id="Saya membuat proyek web untuk mengubah ide menjadi sesuatu yang berguna.">I build web projects to turn ideas into something useful.</p>
       <div class="hero-actions">
-        <a href="#projects" class="btn btn-solid">See Projects <i class="bi bi-arrow-right"></i></a>
-        <a href="#contact" class="btn btn-outline"><i class="bi bi-envelope"></i> Contact Me</a>
+        <a href="#projects" class="btn btn-solid"><span data-en="See Projects" data-id="Lihat Proyek">See Projects</span> <i class="bi bi-arrow-right"></i></a>
+        <a href="#contact" class="btn btn-outline"><i class="bi bi-envelope"></i> <span data-en="Contact Me" data-id="Hubungi Saya">Contact Me</span></a>
       </div>
       <div class="hero-socials">
         <a href="https://linkedin.com/in/miduk-jhon-hutagalung-6354b6425/" target="_blank" rel="noopener"><i class="bi bi-linkedin"></i></a>
@@ -354,7 +380,9 @@
       <div class="hero-ring">
         <div class="hero-photo"><img src="img/mid3.jpg" alt="Miduk Jhon Hutagalung"></div>
       </div>
-      <div class="hero-script">Building Ideas<br>Solutions for<br>Into Web Projects</div>
+      <div class="hero-script"
+           data-en="Building Ideas<br>Solutions for<br>Into Web Projects"
+           data-id="Membangun Ide<br>Solusi untuk<br>Menjadi Proyek Web">Building Ideas<br>Solutions for<br>Into Web Projects</div>
     </div>
   </div>
 </section>
@@ -363,20 +391,22 @@
 <section id="about" class="about">
   <div class="wrap">
     <div class="about-text" data-reveal>
-      <div class="eyebrow">About Me</div> 
-      <p style="margin-top:16px;">
+      <div class="eyebrow" data-en="About Me" data-id="Tentang Saya">About Me</div> 
+      <p style="margin-top:16px;"
+         data-en="I enjoy creating web projects, exploring new ideas, and learning new things."
+         data-id="Saya senang membuat proyek web, mengeksplorasi ide baru, dan mempelajari hal-hal baru.">
         I enjoy creating web projects, exploring new ideas, and learning new things.
       </p>
-      <div class="about-quote">Thanks for stopping by! <i class="bi bi-emoji-smile"></i></div>
+      <div class="about-quote"><span data-en="Thanks for stopping by!" data-id="Terima kasih sudah berkunjung!">Thanks for stopping by!</span> <i class="bi bi-emoji-smile"></i></div>
     </div>
     <div class="stat-grid" data-reveal>
       <div class="stat-card">
         <div class="stat-icon"><i class="bi bi-folder2"></i></div>
-        <div><div class="stat-num">2</div><div class="stat-label">Real Project</div></div>
+        <div><div class="stat-num">2</div><div class="stat-label" data-en="Real Project" data-id="Proyek Nyata">Real Project</div></div>
       </div>
       <div class="stat-card">
         <div class="stat-icon"><i class="bi bi-code-slash"></i></div>
-        <div><div class="stat-num">5+</div><div class="stat-label">Technologies Used</div></div>
+        <div><div class="stat-num">5+</div><div class="stat-label" data-en="Technologies Used" data-id="Teknologi yang Dipakai">Technologies Used</div></div>
       </div>
     </div>
   </div>
@@ -386,41 +416,42 @@
 <section id="skills" class="skills">
   <div class="wrap">
     <div class="section-head" data-reveal>
-      <div class="eyebrow">My Skills</div>
-      <p>A few of the technologies I use to build web applications.</p>
+      <div class="eyebrow" data-en="My Skills" data-id="Keahlian Saya">My Skills</div>
+      <p data-en="A few of the technologies I use to build web applications."
+         data-id="Beberapa teknologi yang saya gunakan untuk membangun aplikasi web.">A few of the technologies I use to build web applications.</p>
     </div>
     <div class="skill-grid" data-reveal>
       <div class="skill-card">
         <div class="skill-icon" style="background:#6b7ce0;"><i class="bi bi-filetype-php"></i></div>
-        <div><div class="skill-name">PHP</div><div class="skill-sub">Backend Development</div></div>
+        <div><div class="skill-name">PHP</div><div class="skill-sub" data-en="Backend Development" data-id="Pengembangan Backend">Backend Development</div></div>
       </div>
       <div class="skill-card">
         <div class="skill-icon" style="background:#ef6a4c;"><i class="bi bi-fire"></i></div>
-        <div><div class="skill-name">CodeIgniter</div><div class="skill-sub">PHP Framework</div></div>
+        <div><div class="skill-name">CodeIgniter</div><div class="skill-sub" data-en="PHP Framework" data-id="Framework PHP">PHP Framework</div></div>
       </div>
       <div class="skill-card">
         <div class="skill-icon" style="background:#e8c334;"><i class="bi bi-filetype-js"></i></div>
-        <div><div class="skill-name">JavaScript</div><div class="skill-sub">Interactive Web</div></div>
+        <div><div class="skill-name">JavaScript</div><div class="skill-sub" data-en="Interactive Web" data-id="Web Interaktif">Interactive Web</div></div>
       </div>
       <div class="skill-card">
         <div class="skill-icon" style="background:#2e6fa7;"><i class="bi bi-database"></i></div>
-        <div><div class="skill-name">MySQL</div><div class="skill-sub">Database</div></div>
+        <div><div class="skill-name">MySQL</div><div class="skill-sub" data-en="Database" data-id="Basis Data">Database</div></div>
       </div>
       <div class="skill-card">
         <div class="skill-icon" style="background:#e8562f;"><i class="bi bi-filetype-html"></i></div>
-        <div><div class="skill-name">HTML</div><div class="skill-sub">Web Structure</div></div>
+        <div><div class="skill-name">HTML</div><div class="skill-sub" data-en="Web Structure" data-id="Struktur Web">Web Structure</div></div>
       </div>
       <div class="skill-card">
         <div class="skill-icon" style="background:#2f6fe0;"><i class="bi bi-filetype-css"></i></div>
-        <div><div class="skill-name">CSS</div><div class="skill-sub">Web Design</div></div>
+        <div><div class="skill-name">CSS</div><div class="skill-sub" data-en="Web Design" data-id="Desain Web">Web Design</div></div>
       </div>
       <div class="skill-card">
         <div class="skill-icon" style="background:#6c3fc9;"><i class="bi bi-bootstrap"></i></div>
-        <div><div class="skill-name">Bootstrap</div><div class="skill-sub">UI Framework</div></div>
+        <div><div class="skill-name">Bootstrap</div><div class="skill-sub" data-en="UI Framework" data-id="Framework UI">UI Framework</div></div>
       </div>
       <div class="skill-card">
         <div class="skill-icon" style="background:#e0507a;"><i class="bi bi-bar-chart-line"></i></div>
-        <div><div class="skill-name">Chart.js</div><div class="skill-sub">Data Visualization</div></div>
+        <div><div class="skill-name">Chart.js</div><div class="skill-sub" data-en="Data Visualization" data-id="Visualisasi Data">Data Visualization</div></div>
       </div>
     </div>
   </div>
@@ -430,8 +461,9 @@
 <section id="projects" class="projects">
   <div class="wrap">
     <div class="section-head" data-reveal>
-      <div class="eyebrow">Projects</div>
-      <p>A selection of projects I’ve worked on. Click an image to explore more..</p>
+      <div class="eyebrow" data-en="Projects" data-id="Proyek">Projects</div>
+      <p data-en="A selection of projects I’ve worked on. Click an image to explore more.."
+         data-id="Beberapa proyek yang pernah saya kerjakan. Klik gambar untuk melihat lebih banyak..">A selection of projects I’ve worked on. Click an image to explore more..</p>
     </div>
 
     <div class="project-grid" data-reveal>
@@ -439,17 +471,33 @@
         <img class="project-thumb" src="img/mrcheck/mr1.jpg" alt="Monitoring Kelengkapan Rekam Medis"
              data-title="Monitoring Kelengkapan Rekam Medis"
              data-gallery="img/mrcheck/mr0.jpg,img/mrcheck/mr1.jpg,img/mrcheck/mr2.jpg,img/mrcheck/mr3.jpg,img/mrcheck/mr4.jpg,img/mrcheck/mr5.jpg,img/mrcheck/mr6.jpg,img/mrcheck/mr7.jpg,img/mrcheck/mr8.jpg,img/mrcheck/mr9.jpg,img/mrcheck/mr10.jpg,img/mrcheck/mr11.jpg,img/mrcheck/mr12.jpg,img/mrcheck/mr13.jpg,img/mrcheck/mr14.jpg,img/mrcheck/mr15.jpg,img/mrcheck/mr16.jpg"
-     data-titles="LOGIN,HALAMAN 1,HALAMAN 2,HALAMAN 3,HALAMAN 4,HALAMAN 5,HALAMAN 6,HALAMAN 7,HALAMAN 8,HALAMAN 9,HALAMAN 10,HALAMAN 11,HALAMAN 12,HALAMAN 13,HALAMAN 14,HALAMAN 15,HALAMAN 16">
-      
-            
+             data-titles="LOGIN,HALAMAN 1,HALAMAN 2,HALAMAN 3,HALAMAN 4,HALAMAN 5,HALAMAN 6,HALAMAN 7,HALAMAN 8,HALAMAN 9,HALAMAN 10,HALAMAN 11,HALAMAN 12,HALAMAN 13,HALAMAN 14,HALAMAN 15,HALAMAN 16"
+             data-titles-en="LOGIN,PAGE 1,PAGE 2,PAGE 3,PAGE 4,PAGE 5,PAGE 6,PAGE 7,PAGE 8,PAGE 9,PAGE 10,PAGE 11,PAGE 12,PAGE 13,PAGE 14,PAGE 15,PAGE 16">
+
         <div class="project-body">
           <div class="project-top">
             <div class="project-title">MRCHECK APP</div>
             <i class="bi bi-arrow-up-right project-arrow"></i>
           </div>
-          <p class="project-desc">
-            MRCHECK APP is an application designed to record incomplete medical records, make it easier for healthcare professionals (PPA) to follow up on them, and help monitor incomplete files through more structured and organized data management.
-          </p>
+
+          <div class="project-desc">
+            <p data-en="MRCheck App is a web-based application designed to help medical records staff record and monitor incomplete medical record documentation by healthcare professionals, such as doctors and nurses."
+               data-id="MRCheck App adalah aplikasi berbasis web yang dirancang untuk mempermudah petugas rekam medis dalam mencatat dan memantau ketidaklengkapan pengisian dokumen rekam medis oleh Profesional Pemberi Asuhan (PPA), seperti dokter dan perawat.">MRCheck App is a web-based application designed to help medical records staff record and monitor incomplete medical record documentation by healthcare professionals, such as doctors and nurses.</p>
+
+            <div class="desc-more" id="descMoreMr">
+              <p data-en="Through this application, staff can record which forms and sections are incomplete, then print the findings to help the responsible healthcare professionals identify and complete the missing information. Staff can also track the correction status of each record and identify when the required documentation has been completed."
+                 data-id="Melalui aplikasi ini, petugas dapat mencatat formulir dan bagian yang belum lengkap, kemudian mencetak hasil temuan tersebut sebagai panduan bagi PPA untuk melengkapi dokumentasi yang masih kurang. Petugas juga dapat memantau status perbaikan setiap dokumen dan mengetahui kapan dokumen telah selesai dilengkapi.">Through this application, staff can record which forms and sections are incomplete, then print the findings to help the responsible healthcare professionals identify and complete the missing information. Staff can also track the correction status of each record and identify when the required documentation has been completed.</p>
+
+              <p data-en="In addition, MRCheck provides reports that can be filtered by date, month, year, and hospital unit. It also identifies the forms most frequently found incomplete and the units with the highest number of incomplete records. These reports can help hospitals evaluate documentation completeness and identify areas for quality improvement."
+                 data-id="Selain itu, MRCheck menyediakan laporan yang dapat difilter berdasarkan tanggal, bulan, tahun, dan ruangan, serta menampilkan formulir yang paling sering ditemukan tidak lengkap dan ruangan dengan jumlah temuan terbanyak. Informasi ini dapat digunakan sebagai bahan evaluasi untuk mendukung peningkatan mutu pengisian dokumen rekam medis di rumah sakit.">In addition, MRCheck provides reports that can be filtered by date, month, year, and hospital unit. It also identifies the forms most frequently found incomplete and the units with the highest number of incomplete records. These reports can help hospitals evaluate documentation completeness and identify areas for quality improvement.</p>
+            </div>
+          </div>
+
+          <button type="button" class="desc-toggle" data-target="descMoreMr" aria-expanded="false">
+            <span class="more-closed" data-en="Read more" data-id="Selengkapnya">Read more</span>
+            <span class="more-open" data-en="Show less" data-id="Tampilkan lebih sedikit">Show less</span>
+          </button>
+
           <div class="project-tags">
             <span class="tag">PHP</span><span class="tag">JavaScript</span><span class="tag">CodeIgniter 3</span><span class="tag">MySQL</span><span class="tag">Chart.js</span>
           </div>
@@ -464,7 +512,7 @@
             <div class="project-title">SIKLUS-RM</div>
             <i class="bi bi-arrow-up-right project-arrow"></i>
           </div>
-          <p class="project-desc">ON GOING....</p>
+          <p class="project-desc" data-en="ON GOING...." data-id="SEDANG DIKERJAKAN....">ON GOING....</p>
           <div class="project-tags">
             <span class="tag">PHP</span><span class="tag">CodeIgniter 3</span><span class="tag">MySQL</span><span class="tag">Bootstrap</span>
           </div>
@@ -478,9 +526,9 @@
 <section id="contact" class="contact">
   <div class="wrap">
     <div data-reveal>
-      <div class="eyebrow" style="color:var(--accent);">Contact</div>
-      <h2>Get in Touch</h2>
-      <p class="contact-desc">Feel free to reach out anytime.</p>
+      <div class="eyebrow" style="color:var(--accent);" data-en="Contact" data-id="Kontak">Contact</div>
+      <h2 data-en="Get in Touch" data-id="Hubungi Saya">Get in Touch</h2>
+      <p class="contact-desc" data-en="Feel free to reach out anytime." data-id="Silakan hubungi saya kapan saja.">Feel free to reach out anytime.</p>
       <ul class="contact-list">
         <li>
           <a href="mailto:midukjhonmeyko@gmail.com">
@@ -508,29 +556,33 @@
 
     <div data-reveal>
       <div class="form-alert d-none" id="formAlert">
-        <span><strong>Terima kasih!</strong> Pesan Anda sudah kami terima.</span>
+        <span data-en="<strong>Thank you!</strong> Your message has been received."
+              data-id="<strong>Terima kasih!</strong> Pesan Anda sudah kami terima."><strong>Terima kasih!</strong> Pesan Anda sudah kami terima.</span>
         <button type="button" id="alertClose">&times;</button>
       </div>
       <form name="mid-contact-form" id="contactForm">
         <div class="form-grid">
           <div class="field">
-            <label for="name">FULL NAME</label>
-            <input type="text" id="name" name="nama" placeholder="Masukkan nama Anda" required>
+            <label for="name" data-en="FULL NAME" data-id="NAMA LENGKAP">FULL NAME</label>
+            <input type="text" id="name" name="nama" placeholder="Enter your name"
+                   data-ph-en="Enter your name" data-ph-id="Masukkan nama Anda" required>
           </div>
           <div class="field">
             <label for="email">Email</label>
-            <input type="email" id="email" name="email" placeholder="Masukkan email Anda" required>
+            <input type="email" id="email" name="email" placeholder="Enter your email"
+                   data-ph-en="Enter your email" data-ph-id="Masukkan email Anda" required>
           </div>
           <div class="field full">
-            <label for="pesan">Message</label>
-            <textarea id="pesan" name="pesan" placeholder="write your Message..." required></textarea>
+            <label for="pesan" data-en="Message" data-id="Pesan">Message</label>
+            <textarea id="pesan" name="pesan" placeholder="Write your message..."
+                      data-ph-en="Write your message..." data-ph-id="Tulis pesan Anda..." required></textarea>
           </div>
           <div class="field full">
             <button type="submit" class="btn btn-solid btn-kirim" style="width:100%; justify-content:center;">
-              <i class="bi bi-send"></i> Send
+              <i class="bi bi-send"></i> <span data-en="Send" data-id="Kirim">Send</span>
             </button>
             <button class="btn btn-solid btn-loading d-none" type="button" disabled style="width:100%; justify-content:center;">
-              <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span> Sending...
+              <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span> <span data-en="Sending..." data-id="Mengirim...">Sending...</span>
             </button>
           </div>
         </div>
@@ -541,7 +593,7 @@
 
 <footer>
   <div class="wrap">
-    <p>&copy; 2026 <a href="https://www.instagram.com/midukjhon_/" target="_blank" rel="noopener" style="text-decoration:underline; text-underline-offset:3px;">Miduk Jhon Hutagalung</a>. All rights reserved.</p>
+    <p>&copy; 2026 <a href="https://www.instagram.com/midukjhon_/" target="_blank" rel="noopener" style="text-decoration:underline; text-underline-offset:3px;">Miduk Jhon Hutagalung</a>. <span data-en="All rights reserved." data-id="Hak cipta dilindungi.">All rights reserved.</span></p>
     
   </div>
 </footer>
@@ -561,6 +613,9 @@
 <style>.d-none{display:none !important;}</style>
 
 <script>
+  // bahasa aktif (dipakai oleh lightbox dan translate)
+  let currentLang = 'en';
+
   // mobile nav toggle
   const navToggle = document.getElementById('navToggle');
   const navLinks = document.getElementById('navLinks');
@@ -595,14 +650,15 @@
   const lbTitle = document.getElementById('lbTitle');
   const lbCounter = document.getElementById('lbCounter');
   let currentGallery = [];
-  let currentTitles = [];
+  let currentTitles = { id: [], en: [] };
   let currentIndex = 0;
   
   function updateLightbox(){
     lbImage.src = currentGallery[currentIndex];
   
-    // Judul mengikuti gambar yang sedang ditampilkan
-    lbTitle.textContent = currentTitles[currentIndex] || '';
+    // Judul mengikuti gambar yang sedang ditampilkan, dalam bahasa yang aktif
+    const list = currentTitles[currentLang] || currentTitles.id || [];
+    lbTitle.textContent = list[currentIndex] || '';
   
     lbCounter.textContent = currentGallery.length > 1
       ? ' (' + (currentIndex + 1) + '/' + currentGallery.length + ')'
@@ -635,19 +691,17 @@
   document.querySelectorAll('.project-thumb').forEach(img => {
     img.addEventListener('click', () => {
   
-      const images = img.dataset.gallery
-        .split(',')
-        .map(s => s.trim())
-        .filter(Boolean);
-  
-      const titles = img.dataset.titles
-        ? img.dataset.titles
-            .split(',')
-            .map(s => s.trim())
-            .filter(Boolean)
-        : [img.dataset.title || ''];
-  
-      openLightbox(images, titles, 0);
+      const parse = s => s ? s.split(',').map(x => x.trim()).filter(Boolean) : [];
+
+      const images = parse(img.dataset.gallery);
+      const fallback = [img.dataset.title || ''];
+      const titlesId = parse(img.dataset.titles);
+      const titlesEn = parse(img.dataset.titlesEn);
+
+      openLightbox(images, {
+        id: titlesId.length ? titlesId : fallback,
+        en: titlesEn.length ? titlesEn : (titlesId.length ? titlesId : fallback)
+      }, 0);
     });
   });
   document.getElementById('lbClose').addEventListener('click', closeLightbox);
@@ -668,6 +722,49 @@
     const diff = e.changedTouches[0].screenX - touchStartX;
     if (Math.abs(diff) > 40) diff < 0 ? nextImage() : prevImage();
   });
+
+  // Read more / Show less
+  document.querySelectorAll('.desc-toggle').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const target = document.getElementById(btn.dataset.target);
+      const open = target.classList.toggle('open');
+      btn.setAttribute('aria-expanded', open);
+    });
+  });
+
+  // ===== TRANSLATE EN <-> ID =====
+  // Teks biasa : tambahkan data-en="..." dan data-id="..." pada elemen.
+  // Placeholder: tambahkan data-ph-en="..." dan data-ph-id="..." pada input/textarea.
+  const langToggle = document.getElementById('langToggle');
+  const langLabel = document.getElementById('langLabel');
+
+  function setLang(lang){
+    currentLang = lang;
+
+    document.querySelectorAll('[data-en][data-id]').forEach(el => {
+      el.innerHTML = el.getAttribute('data-' + lang);
+    });
+    document.querySelectorAll('[data-ph-en][data-ph-id]').forEach(el => {
+      el.placeholder = el.getAttribute('data-ph-' + lang);
+    });
+
+    document.documentElement.lang = lang;
+    // tombol menampilkan bahasa tujuan berikutnya
+    langLabel.textContent = lang === 'en' ? 'ID' : 'EN';
+
+    // kalau lightbox sedang terbuka, judul fotonya ikut berganti
+    if (lightbox.classList.contains('show')) updateLightbox();
+
+    try { localStorage.setItem('portfolioLang', lang); } catch(e) {}
+  }
+
+  langToggle.addEventListener('click', () => setLang(currentLang === 'en' ? 'id' : 'en'));
+
+  // ingat pilihan bahasa terakhir pengunjung
+  try {
+    const saved = localStorage.getItem('portfolioLang');
+    if (saved === 'id') setLang('id');
+  } catch(e) {}
 
   // contact form -> Google Apps Script (ganti scriptURL dengan milik Anda)
   const scriptURL = 'https://script.google.com/macros/s/AKfycbxDPSBBTkorTVTmykAbgidUHW00NzXy2DVdzKqcJltGe65uC-LR2l32TMAaFyw1MD3giw/exec';
