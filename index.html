@@ -650,86 +650,101 @@
   }, { threshold: 0.15 });
   revealEls.forEach(el => io.observe(el));
 
-  // project photo lightbox slideshow
+    // project photo lightbox slideshow
   const lightbox = document.getElementById('lightbox');
   const lbImage = document.getElementById('lbImage');
   const lbTitle = document.getElementById('lbTitle');
   const lbCounter = document.getElementById('lbCounter');
+  const lbDesc = document.getElementById('lbDesc');   // boleh null kalau elemennya tidak ada
   const lbPrev = document.getElementById('lbPrev');
   const lbNext = document.getElementById('lbNext');
   let currentGallery = [];
   let currentTitles = { id: [], en: [] };
+  let currentDescs = { id: [], en: [] };
   let currentIndex = 0;
 
-  
-  
-  function updateLightbox(){
-    lbImage.src = currentGallery[currentIndex];
-  
-    // Judul mengikuti gambar yang sedang ditampilkan, dalam bahasa yang aktif
-    const list = currentTitles[currentLang] || currentTitles.id || [];
-    lbTitle.textContent = list[currentIndex] || '';
-  
-    lbCounter.textContent = currentGallery.length > 1
-      ? ' (' + (currentIndex + 1) + '/' + currentGallery.length + ')'
-      : '';
-  }
+  // tombol hilang di foto pertama (kiri) dan foto terakhir (kanan)
   function updateNavButtons(){
     const many = currentGallery.length > 1;
     lbPrev.style.display = (many && currentIndex > 0) ? 'flex' : 'none';
     lbNext.style.display = (many && currentIndex < currentGallery.length - 1) ? 'flex' : 'none';
   }
-  
-  function openLightbox(images, titles, index){
+
+  function updateLightbox(){
+    lbImage.src = currentGallery[currentIndex];
+
+    const list = currentTitles[currentLang] || currentTitles.id || [];
+    lbTitle.textContent = list[currentIndex] || '';
+
+    if (lbDesc) {
+      const desc = (currentDescs[currentLang] || [])[currentIndex] || '';
+      lbDesc.textContent = desc;
+      lbDesc.classList.toggle('show', !!desc);
+    }
+
+    lbCounter.textContent = currentGallery.length > 1
+      ? ' (' + (currentIndex + 1) + '/' + currentGallery.length + ')'
+      : '';
+
+    updateNavButtons();
+  }
+
+  function openLightbox(images, titles, index, descs){
     currentGallery = images;
     currentTitles = titles;
+    currentDescs = descs || { id: [], en: [] };
     currentIndex = index;
-  
+
     updateLightbox();
     lightbox.classList.add('show');
   }
-  
+
   function closeLightbox(){
     lightbox.classList.remove('show');
   }
-  
+
   function nextImage(){
     if (currentIndex >= currentGallery.length - 1) return;
     currentIndex++;
     updateLightbox();
   }
-  
+
   function prevImage(){
     if (currentIndex <= 0) return;
     currentIndex--;
     updateLightbox();
   }
-  
-  document.querySelectorAll('.project-thumb').forEach(img => {
-  img.addEventListener('click', () => {
 
-    const parse = s => {
+  document.querySelectorAll('.project-thumb').forEach(img => {
+    img.addEventListener('click', () => {
+
+      const parse = s => {
         if (!s) return [];
-        // format {isi 1}{isi 2}{isi 3}: boleh ada koma di dalamnya
+        // format {isi 1}{isi 2}: boleh ada koma di dalamnya
         if (s.includes('{')) return [...s.matchAll(/\{([^}]*)\}/g)].map(m => m[1].trim());
-        // format lama dipisah koma (tetap dipakai untuk data-gallery)
+        // format lama dipisah koma (dipakai data-gallery)
         return s.split(',').map(x => x.trim()).filter(Boolean);
       };
-  
+      const parseDesc = s => s ? s.split('|').map(x => x.trim()) : [];
+
       const images = parse(img.dataset.gallery);
       const fallback = [img.dataset.title || ''];
       const titlesId = parse(img.dataset.titles);
       const titlesEn = parse(img.dataset.titlesEn);
-  
+
       openLightbox(images, {
         id: titlesId.length ? titlesId : fallback,
         en: titlesEn.length ? titlesEn : (titlesId.length ? titlesId : fallback)
-      }, 0);
+      }, 0, {
+        id: parseDesc(img.dataset.descsId),
+        en: parseDesc(img.dataset.descsEn)
+      });
     });
   });
+
   document.getElementById('lbClose').addEventListener('click', closeLightbox);
-  document.getElementById('lbNext').addEventListener('click', nextImage);
-  document.getElementById('lbPrev').addEventListener('click', prevImage);
+  lbNext.addEventListener('click', nextImage);
+  lbPrev.addEventListener('click', prevImage);
   lightbox.addEventListener('click', e => { if (e.target === lightbox) closeLightbox(); });
   document.addEventListener('keydown', e => {
     if (!lightbox.classList.contains('show')) return;
@@ -738,18 +753,17 @@
     if (e.key === 'ArrowLeft') prevImage();
   });
 
-  // swipe support on mobile
+  // swipe support on mobile (tidak aktif saat cubit-zoom atau halaman diperbesar)
   let touchStartX = 0, touchStartY = 0, multiTouch = false;
-  
+
   lightbox.addEventListener('touchstart', e => {
-    if (e.touches.length > 1) { multiTouch = true; return; }   // pinch zoom
+    if (e.touches.length > 1) { multiTouch = true; return; }
     multiTouch = false;
     touchStartX = e.changedTouches[0].screenX;
     touchStartY = e.changedTouches[0].screenY;
   }, { passive: true });
-  
+
   lightbox.addEventListener('touchend', e => {
-    // abaikan kalau habis pinch atau halaman sedang diperbesar
     const zoomed = window.visualViewport && window.visualViewport.scale > 1.01;
     if (multiTouch || zoomed) {
       if (e.touches.length === 0) multiTouch = false;
@@ -757,12 +771,10 @@
     }
     const dx = e.changedTouches[0].screenX - touchStartX;
     const dy = e.changedTouches[0].screenY - touchStartY;
-    // hanya hitung kalau geserannya dominan ke samping
     if (Math.abs(dx) > 40 && Math.abs(dx) > Math.abs(dy) * 1.5) {
       dx < 0 ? nextImage() : prevImage();
     }
   });
-
   // Read more / Show less
   document.querySelectorAll('.desc-toggle').forEach(btn => {
     btn.addEventListener('click', () => {
