@@ -689,15 +689,21 @@
   }
   
   document.querySelectorAll('.project-thumb').forEach(img => {
-    img.addEventListener('click', () => {
-  
-      const parse = s => s ? s.split(',').map(x => x.trim()).filter(Boolean) : [];
+  img.addEventListener('click', () => {
 
+    const parse = s => {
+        if (!s) return [];
+        // format {isi 1}{isi 2}{isi 3}: boleh ada koma di dalamnya
+        if (s.includes('{')) return [...s.matchAll(/\{([^}]*)\}/g)].map(m => m[1].trim());
+        // format lama dipisah koma (tetap dipakai untuk data-gallery)
+        return s.split(',').map(x => x.trim()).filter(Boolean);
+      };
+  
       const images = parse(img.dataset.gallery);
       const fallback = [img.dataset.title || ''];
       const titlesId = parse(img.dataset.titles);
       const titlesEn = parse(img.dataset.titlesEn);
-
+  
       openLightbox(images, {
         id: titlesId.length ? titlesId : fallback,
         en: titlesEn.length ? titlesEn : (titlesId.length ? titlesId : fallback)
