@@ -661,11 +661,7 @@
   let currentTitles = { id: [], en: [] };
   let currentIndex = 0;
 
-  function updateNavButtons(){
-    const many = currentGallery.length > 1;
-    lbPrev.style.display = (many && currentIndex > 0) ? 'flex' : 'none';
-    lbNext.style.display = (many && currentIndex < currentGallery.length - 1) ? 'flex' : 'none';
-  }
+  
   
   function updateLightbox(){
     lbImage.src = currentGallery[currentIndex];
@@ -677,6 +673,11 @@
     lbCounter.textContent = currentGallery.length > 1
       ? ' (' + (currentIndex + 1) + '/' + currentGallery.length + ')'
       : '';
+  }
+  function updateNavButtons(){
+    const many = currentGallery.length > 1;
+    lbPrev.style.display = (many && currentIndex > 0) ? 'flex' : 'none';
+    lbNext.style.display = (many && currentIndex < currentGallery.length - 1) ? 'flex' : 'none';
   }
   
   function openLightbox(images, titles, index){
@@ -693,12 +694,14 @@
   }
   
   function nextImage(){
-    currentIndex = (currentIndex + 1) % currentGallery.length;
+    if (currentIndex >= currentGallery.length - 1) return;
+    currentIndex++;
     updateLightbox();
   }
   
   function prevImage(){
-    currentIndex = (currentIndex - 1 + currentGallery.length) % currentGallery.length;
+    if (currentIndex <= 0) return;
+    currentIndex--;
     updateLightbox();
   }
   
